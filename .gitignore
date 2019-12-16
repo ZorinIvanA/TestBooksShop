@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/Sirena.Books/.vs/Sirena.Books
+/Sirena.Books/Sirena.Books.Api/bin/Debug/netcoreapp3.0
+/Sirena.Books/Sirena.Books.Api/obj
+/Sirena.Books/Sirena.Books.Domain/bin/Debug/netcoreapp3.0
+/Sirena.Books/Sirena.Books.Domain/obj
+/Sirena.Books/Sirena.Books.Infrastructure/bin/Debug/netcoreapp3.0
+/Sirena.Books/Sirena.Books.Infrastructure/obj
+/Sirena.Books/Sirena.Books.Api/secret.json
