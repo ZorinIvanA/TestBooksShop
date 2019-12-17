@@ -17,8 +17,9 @@ namespace Sirena.Books.Api.Models
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         [Required]
-        [DataType(DataType.Text)]
         public BookType Type { get; set; }
+        [Required]
+        public int Storage { get; set; }
 
         public Book ToEntity()
         {
@@ -27,7 +28,8 @@ namespace Sirena.Books.Api.Models
                 Author = Author,
                 Name = Name,
                 Price = Price,
-                Type = Type
+                Type = Type,
+                RestInStorage = Storage
             };
         }
 
@@ -39,7 +41,8 @@ namespace Sirena.Books.Api.Models
                 Name = entity.Name,
                 Price = entity.Price,
                 Type = entity.Type,
-                Id = entity.Id
+                Id = entity.Id,
+                Storage = entity.RestInStorage
             };
         }
     }

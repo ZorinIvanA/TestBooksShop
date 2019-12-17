@@ -52,7 +52,20 @@ namespace Sirena.Books.Infrastructure.Repositories
 
         public async Task AddBookAsync(Book book, CancellationToken cancellationToken)
         {
+            var queryParameters = new DynamicParameters();
+            queryParameters.Add("_name", book.Name);
+            queryParameters.Add("_author", book.Author);
+            queryParameters.Add("_price", book.Price, DbType.Decimal);
+            queryParameters.Add("_type", book.Price, DbType.Int32);
+            queryParameters.Add("_storage", book.RestInStorage, DbType.Int32);
 
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                await dbConnection.QueryFirstOrDefaultAsync<int>(
+                    "common.add_book", queryParameters,
+                    commandType: CommandType.StoredProcedure);
+            }
         }
 
         public async Task BuyBookAsync(int id, CancellationToken cancellationToken)
