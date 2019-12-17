@@ -33,12 +33,12 @@ namespace Sirena.Books.Infrastructure.Repositories
             string name, CancellationToken cancellationToken)
         {
             var queryParameters = new DynamicParameters();
-            queryParameters.Add("@_exists", isExists, DbType.Boolean);
-            queryParameters.Add("@_types", types?.ToString(), DbType.String);
-            queryParameters.Add("@_minCost", minCost, DbType.Decimal);
-            queryParameters.Add("@_maxCost", maxCost, DbType.Decimal);
-            queryParameters.Add("@_author", author, DbType.String);
-            queryParameters.Add("@_name", name, DbType.String);
+            queryParameters.Add("_exists", isExists, DbType.Boolean);
+            queryParameters.Add("_types", types?.ToString(), DbType.String);
+            queryParameters.Add("_minCost", minCost, DbType.Decimal);
+            queryParameters.Add("_maxCost", maxCost, DbType.Decimal);
+            queryParameters.Add("_author", author, DbType.String);
+            queryParameters.Add("_name", name, DbType.String);
 
             using (IDbConnection dbConnection = Connection)
             {

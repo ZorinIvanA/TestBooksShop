@@ -23,8 +23,8 @@ namespace Sirena.Books.Api.Controllers
             _booksService = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]FilterModel model, CancellationToken cancellationToken)
+        [HttpPost]
+        public async Task<IActionResult> Get([FromBody]FilterModel model, CancellationToken cancellationToken)
         {
             try
             {
