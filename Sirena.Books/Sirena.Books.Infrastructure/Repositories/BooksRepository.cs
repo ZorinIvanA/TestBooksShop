@@ -34,18 +34,21 @@ namespace Sirena.Books.Infrastructure.Repositories
         {
             var queryParameters = new DynamicParameters();
             queryParameters.Add("_exists", isExists, DbType.Boolean);
-            queryParameters.Add("_types", types?.ToString(), DbType.String);
-            queryParameters.Add("_minCost", minCost, DbType.Decimal);
-            queryParameters.Add("_maxCost", maxCost, DbType.Decimal);
+            queryParameters.Add("_types", 
+                JsonConvert.SerializeObject(types), DbType.String);
+            queryParameters.Add("_minCost", minCost, DbType.VarNumeric);
+            queryParameters.Add("_maxCost", maxCost, DbType.VarNumeric);
             queryParameters.Add("_author", author, DbType.String);
             queryParameters.Add("_name", name, DbType.String);
+            var query =
+                $"SELECT * FROM common.get_books_by_params({isExists}, '{JsonConvert.SerializeObject(types)}', {minCost}, {maxCost}, '{author}','{name}')";
 
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
                 return (await dbConnection.QueryAsync<BookDto>(
-                        "common.get_books_by_params", queryParameters,
-                        commandType: CommandType.StoredProcedure))
+                        query, null,
+                        commandType: CommandType.Text))
                     .Select(x => x.ToEntity()).ToArray();
             }
         }
@@ -70,7 +73,16 @@ namespace Sirena.Books.Infrastructure.Repositories
 
         public async Task BuyBookAsync(int id, CancellationToken cancellationToken)
         {
+            var queryParameters = new DynamicParameters();
+            queryParameters.Add("_id", id);
 
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(
+                    "common.sell_book", queryParameters,
+                    commandType: CommandType.StoredProcedure);
+            }
         }
 
         public async Task<int[]> GetSalesByTimesAsync(DateTime minDate, DateTime maxDate, CancellationToken cancellationToken)

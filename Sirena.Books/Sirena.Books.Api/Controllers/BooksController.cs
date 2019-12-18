@@ -52,7 +52,7 @@ namespace Sirena.Books.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("123");
+                return await GetServerErrorResult(ex, "api/v1/books/buy");
             }
         }
     }

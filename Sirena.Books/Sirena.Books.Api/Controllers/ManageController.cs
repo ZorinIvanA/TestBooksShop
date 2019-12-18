@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sirena.Books.Api.Models;
 using Sirena.Books.Domain.Interfaces;
 
@@ -12,11 +13,12 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/manage")]
     [ApiController]
-    public class ManageController : ControllerBase
+    public class ManageController : ApiControllerBase
     {
         private readonly IBooksService _service;
 
-        public ManageController(IBooksService service)
+        public ManageController(IBooksService service, ILogger<ManageController> logger)
+            : base(logger)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
@@ -28,14 +30,14 @@ namespace Sirena.Books.Api.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                    return await GetBadRequestResult(ModelState, "api/v1/manage/add");
 
                 await _service.AddAsync(model.ToEntity(), cancellationToken);
                 return Ok();
             }
             catch (Exception ex)
             {
-                return BadRequest("123");
+                return await GetServerErrorResult(ex, "api/v1/manage/add");
             }
         }
     }

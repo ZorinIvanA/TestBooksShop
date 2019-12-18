@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Sirena.Books.Api.Models;
 using Sirena.Books.Domain.Interfaces;
 
@@ -10,11 +11,13 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/summary")]
     [ApiController]
-    public class SummaryController : ControllerBase
+    public class SummaryController : ApiControllerBase
     {
         private readonly ISummaryService _summaryService;
 
-        public SummaryController(ISummaryService service)
+        public SummaryController(ISummaryService service,
+            ILogger<SummaryController> logger) :
+            base(logger)
         {
             _summaryService = service ?? throw new ArgumentNullException(nameof(service));
         }
