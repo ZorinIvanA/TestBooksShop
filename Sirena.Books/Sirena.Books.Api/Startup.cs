@@ -38,7 +38,8 @@ namespace Sirena.Books.Api
             services.AddScoped<ISummaryService, SummaryService>();
             services.AddScoped<IBooksRepository, BooksRepository>();
             //services.AddSingleton(Configuration);
-            services.Configure<DbInfo>(options=>Configuration.GetSection("Connectionstrings").Bind(options));
+            services.Configure<DbInfo>(options => Configuration
+                .GetSection("Connectionstrings").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

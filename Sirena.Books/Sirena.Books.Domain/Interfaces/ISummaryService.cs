@@ -9,7 +9,7 @@ namespace Sirena.Books.Domain.Interfaces
 {
     public interface ISummaryService
     {
-        Task<IDictionary<TimeSpan, int>> GetSoldByTimesAsync(
+        Task<IDictionary<DateTime, int>> GetSoldByTimesAsync(
             DateTime? minDate, DateTime? maxDate,
             CancellationToken cancellationToken);
 

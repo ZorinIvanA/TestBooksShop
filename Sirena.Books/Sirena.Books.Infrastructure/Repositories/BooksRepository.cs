@@ -34,7 +34,7 @@ namespace Sirena.Books.Infrastructure.Repositories
         {
             var queryParameters = new DynamicParameters();
             queryParameters.Add("_exists", isExists, DbType.Boolean);
-            queryParameters.Add("_types", 
+            queryParameters.Add("_types",
                 JsonConvert.SerializeObject(types), DbType.String);
             queryParameters.Add("_minCost", minCost, DbType.VarNumeric);
             queryParameters.Add("_maxCost", maxCost, DbType.VarNumeric);
@@ -85,14 +85,36 @@ namespace Sirena.Books.Infrastructure.Repositories
             }
         }
 
-        public async Task<int[]> GetSalesByTimesAsync(DateTime minDate, DateTime maxDate, CancellationToken cancellationToken)
+        public async Task<IDictionary<DateTime, int>> GetSalesByTimesAsync(DateTime minDate, DateTime maxDate, CancellationToken cancellationToken)
         {
-            return new int[0];
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return new Dictionary<DateTime, int>(
+                    (await dbConnection.QueryAsync<SaleByDateDto>(
+                    $"SELECT * FROM common.get_sales_by_days('{minDate.ToString("yyyy-MM-dd")}', '{maxDate.ToString("yyyy-MM-dd")}')", null,
+                    commandType: CommandType.Text))
+                        .Select(x =>
+                    new KeyValuePair<DateTime, int>(x.sale_dt, x.sold_count)));
+            }
         }
 
-        public async Task<int[]> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate, CancellationToken cancellationToken)
+        public async Task<IDictionary<int, int>> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate, CancellationToken cancellationToken)
         {
-            return new int[0];
+            var queryParameters = new DynamicParameters();
+            queryParameters.Add("startDate", minDate);
+            queryParameters.Add("finishDate", maxDate);
+
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return new Dictionary<int, int>(
+                    (await dbConnection.QueryAsync<SaleByTypeDto>(
+                        $"SELECT * FROM common.get_sales_by_types('{minDate.ToString("yyyy-MM-dd")}', '{maxDate.ToString("yyyy-MM-dd")}')", null,
+                        commandType: CommandType.Text))
+                    .Select(x =>
+                        new KeyValuePair<int, int>(x.book_type, x.sold_count)));
+            }
         }
     }
 }

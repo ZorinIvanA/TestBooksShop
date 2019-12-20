@@ -7,10 +7,10 @@ namespace Sirena.Books.Api.Models
 {
     public class StatByTimeResultModel
     {
-        public TimeSpan SellInterval { get; set; }
+        public DateTime SellInterval { get; set; }
         public int SoldBooks { get; set; }
 
-        public static StatByTimeResultModel FromEnity(KeyValuePair<TimeSpan, int> data)
+        public static StatByTimeResultModel FromEnity(KeyValuePair<DateTime, int> data)
         {
             return new StatByTimeResultModel
             {

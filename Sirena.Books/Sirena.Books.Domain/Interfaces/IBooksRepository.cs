@@ -15,10 +15,10 @@ namespace Sirena.Books.Domain.Interfaces
 
         Task AddBookAsync(Book book, CancellationToken cancellationToken);
         Task BuyBookAsync(int id, CancellationToken cancellationToken);
-        Task<int[]> GetSalesByTimesAsync(DateTime minDate, DateTime maxDate,
+        Task<IDictionary<DateTime, int>> GetSalesByTimesAsync(DateTime minDate, DateTime maxDate,
             CancellationToken cancellationToken);
 
-        Task<int[]> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate,
+        Task<IDictionary<int,int>> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate,
             CancellationToken cancellationToken);
     }
 }

@@ -18,18 +18,16 @@ namespace Sirena.Books.Domain.Services
             _booksRepository = booksRepository ?? throw new ArgumentNullException(nameof(booksRepository));
         }
 
-        public async Task<IDictionary<TimeSpan, int>> GetSoldByTimesAsync(DateTime? minDate, DateTime? maxDate, CancellationToken cancellationToken)
+        public async Task<IDictionary<DateTime, int>> GetSoldByTimesAsync(DateTime? minDate, DateTime? maxDate, CancellationToken cancellationToken)
         {
             if (minDate == null)
                 minDate = DateTime.MinValue;
             if (maxDate == null)
                 maxDate = DateTime.MaxValue;
 
-            return new Dictionary<TimeSpan, int>(
+            return new Dictionary<DateTime, int>(
                 (await _booksRepository.GetSalesByTimesAsync(
-                    minDate.Value, maxDate.Value, cancellationToken))
-                .Select(x => new KeyValuePair<TimeSpan, int>(
-                    new TimeSpan(0, 1, 0, 0), x)));
+                    minDate.Value, maxDate.Value, cancellationToken)));
         }
 
         public async Task<IDictionary<BookType, int>> GetSoldByTypesAsync(DateTime? minDate, DateTime? maxDate, CancellationToken cancellationToken)
@@ -42,10 +40,10 @@ namespace Sirena.Books.Domain.Services
             IDictionary<BookType, int> result = new Dictionary<BookType, int>();
             var dataFromRepo = await _booksRepository.GetSalesByTypesAsync(
                 minDate.Value, maxDate.Value, cancellationToken);
-            for (int i = 0; i < dataFromRepo.Length; i++)
+            foreach (var dataItem in dataFromRepo)
             {
-                if (Enum.IsDefined(typeof(BookType), i))
-                    result.Add((BookType)i, dataFromRepo[i]);
+                if (Enum.IsDefined(typeof(BookType), dataItem.Key))
+                    result.Add((BookType)dataItem.Key, dataItem.Value);
             }
 
             return result;
