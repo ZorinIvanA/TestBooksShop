@@ -1,0 +1,15 @@
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-18 00:00:00.000000', 1);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (1, '2019-12-18 00:00:00.000000', 2);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (1, '2019-12-18 00:00:00.000000', 3);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (1, '2019-12-18 00:00:00.000000', 4);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-18 00:00:00.000000', 5);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-20 00:00:00.000000', 6);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-20 00:00:00.000000', 7);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-20 00:00:00.000000', 8);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-20 00:00:00.000000', 9);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (1, '2019-12-22 13:56:36.426830', 10);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (2, '2019-12-22 13:56:43.029631', 11);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (3, '2019-12-22 13:56:44.832123', 12);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (7, '2019-12-22 13:56:48.162524', 13);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (1, '2019-12-22 13:56:49.667090', 14);
+INSERT INTO common.sales (book_id, sale_date, sale_id) VALUES (2, '2019-12-22 13:56:51.267651', 15);
