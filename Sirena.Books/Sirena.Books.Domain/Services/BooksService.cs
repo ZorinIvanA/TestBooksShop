@@ -8,6 +8,9 @@ using Sirena.Books.Domain.Interfaces;
 
 namespace Sirena.Books.Domain.Services
 {
+    /// <summary>
+    /// Служба взаимодействия с сервисом
+    /// </summary>
     public class BooksService : IBooksService
     {
         private readonly IBooksRepository _booksRepository;

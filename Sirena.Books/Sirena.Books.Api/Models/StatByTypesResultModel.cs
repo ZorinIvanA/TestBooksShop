@@ -6,6 +6,9 @@ using Sirena.Books.Domain.Enums;
 
 namespace Sirena.Books.Api.Models
 {
+    /// <summary>
+    /// Модель статистики продаж по типам
+    /// </summary>
     public class StatByTypesResultModel
     {
         public BookType BookType { get; set; }

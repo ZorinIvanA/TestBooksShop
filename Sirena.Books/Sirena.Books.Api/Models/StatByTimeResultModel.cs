@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Sirena.Books.Api.Models
 {
+    /// <summary>
+    /// Модель статистики по времени
+    /// </summary>
     public class StatByTimeResultModel
     {
         public DateTime SellInterval { get; set; }

@@ -4,6 +4,9 @@ using Sirena.Books.Domain.Enums;
 
 namespace Sirena.Books.Api.Models
 {
+    /// <summary>
+    /// Модель книги
+    /// </summary>
     public class BookModel
     {
         public int Id { get; set; }
@@ -21,6 +24,10 @@ namespace Sirena.Books.Api.Models
         [Required]
         public int Storage { get; set; }
 
+        /// <summary>
+        /// Преобразует в бизнес-сущность
+        /// </summary>
+        /// <returns></returns>
         public Book ToEntity()
         {
             return new Book

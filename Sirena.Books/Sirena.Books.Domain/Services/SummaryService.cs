@@ -10,6 +10,9 @@ using Sirena.Books.Domain.Interfaces;
 
 namespace Sirena.Books.Domain.Services
 {
+    /// <summary>
+    /// Служба статистики
+    /// </summary>
     public class SummaryService : ISummaryService
     {
         private readonly IBooksRepository _booksRepository;

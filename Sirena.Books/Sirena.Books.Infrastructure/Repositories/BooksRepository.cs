@@ -17,6 +17,9 @@ using Newtonsoft.Json;
 
 namespace Sirena.Books.Infrastructure.Repositories
 {
+    /// <summary>
+    /// Репозиторий книг
+    /// </summary>
     public class BooksRepository : IBooksRepository
     {
         private readonly DbInfo _info;

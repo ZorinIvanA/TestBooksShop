@@ -7,6 +7,9 @@ using Sirena.Books.Domain.Enums;
 
 namespace Sirena.Books.Infrastructure.Dto
 {
+    /// <summary>
+    /// Dto для взаимодействия с книгой
+    /// </summary>
     public class BookDto
     {
         public int id { get; set; }
@@ -16,6 +19,10 @@ namespace Sirena.Books.Infrastructure.Dto
         public int book_type { get; set; }
         public int storage { get; set; }
 
+        /// <summary>
+        /// Преобразовывает Dto в в бизнес-сущность
+        /// </summary>
+        /// <returns></returns>
         public Book ToEntity()
         {
             return new Book
