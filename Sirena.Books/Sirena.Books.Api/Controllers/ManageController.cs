@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sirena.Books.Api.CustomAuth;
 using Sirena.Books.Api.Models;
 using Sirena.Books.Domain.Interfaces;
 
@@ -13,6 +15,7 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/manage")]
     [ApiController]
+    [Authorize(Policy = AuthConstants.ADMIN_ROLE)]
     public class ManageController : ApiControllerBase
     {
         private readonly IBooksService _service;

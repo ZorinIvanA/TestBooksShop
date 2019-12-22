@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sirena.Books.Api.CustomAuth;
 using Sirena.Books.Api.Models;
 using Sirena.Books.Domain.Interfaces;
 
@@ -24,6 +26,7 @@ namespace Sirena.Books.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = AuthConstants.CUSTOMER_ROLE, Roles = AuthConstants.CUSTOMER_ROLE)]
         public async Task<IActionResult> Get([FromBody]FilterModel model, CancellationToken cancellationToken)
         {
             try
@@ -56,5 +59,4 @@ namespace Sirena.Books.Api.Controllers
             }
         }
     }
-
 }

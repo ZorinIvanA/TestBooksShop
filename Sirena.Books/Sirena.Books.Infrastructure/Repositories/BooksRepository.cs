@@ -58,6 +58,9 @@ namespace Sirena.Books.Infrastructure.Repositories
 
         public async Task AddBookAsync(Book book, CancellationToken cancellationToken)
         {
+            if (book==null)
+                throw new ArgumentNullException(nameof(book));
+
             var queryParameters = new DynamicParameters();
             queryParameters.Add("_name", book.Name);
             queryParameters.Add("_author", book.Author);

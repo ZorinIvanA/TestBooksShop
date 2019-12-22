@@ -45,7 +45,7 @@ namespace Sirena.Books.Api.Controllers
         protected async Task<IActionResult> GetServerErrorResult(
             Exception error, string route)
         {
-            _logger.LogError(error.Message.ToString(), null);
+            _logger.LogError("Ошибка сервера", error);
 
             //Возвращаем 200 чтобы фронт не раскрашивался красным
             return Ok(new ProblemDetails

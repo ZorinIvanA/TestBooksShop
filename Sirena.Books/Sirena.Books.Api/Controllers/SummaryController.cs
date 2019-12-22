@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sirena.Books.Api.CustomAuth;
 using Sirena.Books.Api.Models;
 using Sirena.Books.Domain.Interfaces;
 
@@ -11,6 +14,7 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/summary")]
     [ApiController]
+    [Authorize(Policy = AuthConstants.ADMIN_ROLE)]
     public class SummaryController : ApiControllerBase
     {
         private readonly ISummaryService _summaryService;

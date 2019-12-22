@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -51,16 +52,14 @@ namespace Sirena.Books.Tests
 
         [Test]
         public async Task ServerError()
-        {
+        { 
             Mock<IBooksService> serviceMock = new Mock<IBooksService>();
             serviceMock.Setup(x => x.GetByParamsAsync(
                 It.IsAny<bool?>(), It.IsAny<int[]>(), It.IsAny<decimal?>(),
                 It.IsAny<decimal?>(), It.IsAny<string>(), It.IsAny<string?>(),
-                It.IsAny<CancellationToken>())).ReturnsAsync(new Book[]
-            {
-                new Book(), new Book(),
-            });
+                It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
             var loggerMock = new Mock<ILogger<BooksController>>();
+
             BooksController controller = new BooksController(serviceMock.Object, loggerMock.Object);
             var filterModel = new FilterModel
             {
@@ -74,9 +73,8 @@ namespace Sirena.Books.Tests
 
             var getResult = (await controller.Get(filterModel, CancellationToken.None)) as OkObjectResult;
             Assert.IsNotNull(getResult);
-            var booksArray = getResult.Value as BookModel[];
-            Assert.IsNotNull(booksArray);
-            Assert.AreEqual(2, booksArray.Length);
+            var errorResult = getResult.Value as ProblemDetails;
+            Assert.IsNotNull(errorResult);
         }
         [Test]
         public async Task BadRequest()
@@ -87,9 +85,9 @@ namespace Sirena.Books.Tests
 
             var getResult = (await controller.Get(null, CancellationToken.None)) as OkObjectResult;
             Assert.IsNotNull(getResult);
-            var booksArray = getResult.Value as ProblemDetails;
-            Assert.IsNotNull(booksArray);
-            Assert.AreEqual(StatusCodes.Status400BadRequest, booksArray.Status);
+            var badRequestResult = getResult.Value as ProblemDetails;
+            Assert.IsNotNull(badRequestResult);
+            Assert.AreEqual(StatusCodes.Status400BadRequest, badRequestResult.Status);
         }
     }
 }
