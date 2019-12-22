@@ -15,7 +15,7 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/manage")]
     [ApiController]
-    [Authorize(Policy = AuthConstants.ADMIN_ROLE)]
+    [Authorize(Policy = AuthConstants.ADMIN)]
     public class ManageController : ApiControllerBase
     {
         private readonly IBooksService _service;

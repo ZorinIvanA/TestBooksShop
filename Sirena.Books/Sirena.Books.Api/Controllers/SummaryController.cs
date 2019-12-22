@@ -14,7 +14,7 @@ namespace Sirena.Books.Api.Controllers
 {
     [Route("api/v1/summary")]
     [ApiController]
-    [Authorize(Policy = AuthConstants.ADMIN_ROLE)]
+    [Authorize(Policy = AuthConstants.ADMIN)]
     public class SummaryController : ApiControllerBase
     {
         private readonly ISummaryService _summaryService;

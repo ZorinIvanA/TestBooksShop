@@ -43,7 +43,6 @@ namespace Sirena.Books.Api
             services.AddScoped<IBooksService, BooksService>();
             services.AddScoped<ISummaryService, SummaryService>();
             services.AddScoped<IBooksRepository, BooksRepository>();
-            //services.AddSingleton(Configuration);
             services.Configure<DbInfo>(options => Configuration
                 .GetSection("ConnectionStrings").Bind(options));
 
@@ -55,10 +54,10 @@ namespace Sirena.Books.Api
             services
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy(AuthConstants.CUSTOMER_ROLE, policy =>
-                        policy.RequireClaim(ClaimTypes.Role, AuthConstants.CUSTOMER_ROLE));
-                    options.AddPolicy(AuthConstants.ADMIN_ROLE, policy =>
-                        policy.RequireClaim(ClaimTypes.Role, AuthConstants.ADMIN_ROLE));
+                    options.AddPolicy(AuthConstants.CUSTOMER, policy =>
+                        policy.RequireClaim(ClaimTypes.Role, AuthConstants.CUSTOMER));
+                    options.AddPolicy(AuthConstants.ADMIN, policy =>
+                        policy.RequireClaim(ClaimTypes.Role, AuthConstants.ADMIN));
                 })
                 .AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
                 .AddBasicAuthentication(
@@ -72,50 +71,37 @@ namespace Sirena.Books.Api
                                 if (context.UserName.Equals("Ivanov", StringComparison.OrdinalIgnoreCase)
                                     && (context.Password.Equals("Test1234")))
                                 {
-                                    var claims = new List<Claim>
-                                    {
-                                        new Claim(ClaimTypes.Name,
-                                            context.UserName,
-                                            context.Options.ClaimsIssuer),
-                                        new Claim(ClaimTypes.Role,AuthConstants.CUSTOMER_ROLE)
-                                    };
-
-                                    var ticket = new AuthenticationTicket(
-                                        new ClaimsPrincipal(new ClaimsIdentity(
-                                            claims,
-                                            BasicAuthenticationDefaults.AuthenticationScheme)),
-                                        new AuthenticationProperties(),
-                                        BasicAuthenticationDefaults.AuthenticationScheme);
-
-                                    return Task.FromResult(AuthenticateResult.Success(ticket));
+                                    return GetAuthenticateResultWithClaim(new Claim(ClaimTypes.Role,
+                                        AuthConstants.CUSTOMER));
                                 }
 
                                 if (context.UserName.Equals("Petrov", StringComparison.OrdinalIgnoreCase)
                                     && (context.Password.Equals("Pas$$w0rD")))
-                                {
-                                    var claims = new List<Claim>
-                                    {
-                                        new Claim(ClaimTypes.Name,
-                                            context.UserName,
-                                            context.Options.ClaimsIssuer),
-                                        new Claim(ClaimTypes.Role,AuthConstants.ADMIN_ROLE)
-                                    };
-
-                                    var ticket = new AuthenticationTicket(
-                                        new ClaimsPrincipal(new ClaimsIdentity(
-                                            claims,
-                                            BasicAuthenticationDefaults.AuthenticationScheme)),
-                                        new AuthenticationProperties(),
-                                        BasicAuthenticationDefaults.AuthenticationScheme);
-
-                                    return Task.FromResult(AuthenticateResult.Success(ticket));
-                                }
+                                    return GetAuthenticateResultWithClaim(new Claim(ClaimTypes.Role,
+                                        AuthConstants.ADMIN));
 
                                 return Task.FromResult(AuthenticateResult.Fail("Authentication failed."));
                             }
                         };
                     });
 
+        }
+
+        Task<AuthenticateResult> GetAuthenticateResultWithClaim(Claim claimToAdd)
+        {
+            var claims = new List<Claim>
+            {
+                claimToAdd
+            };
+
+            var ticket = new AuthenticationTicket(
+                new ClaimsPrincipal(new ClaimsIdentity(
+                    claims,
+                    BasicAuthenticationDefaults.AuthenticationScheme)),
+                new AuthenticationProperties(),
+                BasicAuthenticationDefaults.AuthenticationScheme);
+
+            return Task.FromResult(AuthenticateResult.Success(ticket));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -26,7 +26,7 @@ namespace Sirena.Books.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = AuthConstants.CUSTOMER_ROLE, Roles = AuthConstants.CUSTOMER_ROLE)]
+        [Authorize(Policy = AuthConstants.CUSTOMER, Roles = AuthConstants.CUSTOMER)]
         public async Task<IActionResult> Get([FromBody]FilterModel model, CancellationToken cancellationToken)
         {
             try
