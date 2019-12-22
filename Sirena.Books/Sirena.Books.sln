@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirena.Books.Api", "Sirena.Books.Api\Sirena.Books.Api.csproj", "{BCC9601C-472A-483B-B4F4-3F822B4C0B8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sirena.Books.Api", "Sirena.Books.Api\Sirena.Books.Api.csproj", "{BCC9601C-472A-483B-B4F4-3F822B4C0B8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirena.Books.Domain", "Sirena.Books.Domain\Sirena.Books.Domain.csproj", "{F2EE547D-E4B3-46C0-AC27-DE3F6F45FF1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sirena.Books.Domain", "Sirena.Books.Domain\Sirena.Books.Domain.csproj", "{F2EE547D-E4B3-46C0-AC27-DE3F6F45FF1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirena.Books.Infrastructure", "Sirena.Books.Infrastructure\Sirena.Books.Infrastructure.csproj", "{F09A2C57-AB53-4FE6-8CE9-66B9D7CD15EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sirena.Books.Infrastructure", "Sirena.Books.Infrastructure\Sirena.Books.Infrastructure.csproj", "{F09A2C57-AB53-4FE6-8CE9-66B9D7CD15EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirena.Books.Tests", "Sirena.Books.Tests\Sirena.Books.Tests.csproj", "{180977E4-F4F7-4784-8A63-F0E753DE4422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F09A2C57-AB53-4FE6-8CE9-66B9D7CD15EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F09A2C57-AB53-4FE6-8CE9-66B9D7CD15EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F09A2C57-AB53-4FE6-8CE9-66B9D7CD15EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{180977E4-F4F7-4784-8A63-F0E753DE4422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180977E4-F4F7-4784-8A63-F0E753DE4422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180977E4-F4F7-4784-8A63-F0E753DE4422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180977E4-F4F7-4784-8A63-F0E753DE4422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,3 +11,5 @@
 /Sirena.Books/Sirena.Books.Infrastructure/bin/Debug/netcoreapp3.0
 /Sirena.Books/Sirena.Books.Infrastructure/obj
 /Sirena.Books/Sirena.Books.Api/secret.json
+/Sirena.Books/Sirena.Books.Tests/bin/Debug/netcoreapp3.0
+/Sirena.Books/Sirena.Books.Tests/obj

@@ -16,8 +16,8 @@ namespace Sirena.Books.Api.Controllers
     public class BooksController : ApiControllerBase
     {
         private readonly IBooksService _booksService;
-        public BooksController(IBooksService service, 
-            ILogger<BooksController> logger):
+        public BooksController(IBooksService service,
+            ILogger<BooksController> logger) :
             base(logger)
         {
             _booksService = service ?? throw new ArgumentNullException(nameof(service));
@@ -28,13 +28,13 @@ namespace Sirena.Books.Api.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (model == null || !ModelState.IsValid)
                     return await GetBadRequestResult(ModelState, "api/v1/books");
 
                 return Ok((await _booksService.GetByParamsAsync(
                     model.Exists, model.Types, model.MinCost, model.MaxCost,
                     model.Author, model.Name, cancellationToken))
-                    .Select(BookModel.FromEntity));
+                    .Select(BookModel.FromEntity).ToArray());
             }
             catch (Exception ex)
             {
