@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sirena.Books.Infrastructure.Dto
+﻿namespace Sirena.Books.Infrastructure.Dto
 {
     /// <summary>
     /// Единица статистики продаж по типу
