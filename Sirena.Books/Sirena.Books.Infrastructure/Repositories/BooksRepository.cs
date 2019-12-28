@@ -59,7 +59,7 @@ namespace Sirena.Books.Infrastructure.Repositories
 
         public async Task AddBookAsync(Book book, CancellationToken cancellationToken)
         {
-            if (book==null)
+            if (book == null)
                 throw new ArgumentNullException(nameof(book));
 
             var queryParameters = new DynamicParameters();
@@ -119,6 +119,7 @@ namespace Sirena.Books.Infrastructure.Repositories
                     (await dbConnection.QueryAsync<SaleByTypeDto>(
                         $"SELECT * FROM common.get_sales_by_types('{minDate.ToString("yyyy-MM-dd")}', '{maxDate.ToString("yyyy-MM-dd")}')", null,
                         commandType: CommandType.Text))
+                    .Where(x => Enum.IsDefined(typeof(BookType), x.book_type))
                     .Select(x =>
                         new KeyValuePair<BookType, int>((BookType)x.book_type, x.sold_count)));
             }
