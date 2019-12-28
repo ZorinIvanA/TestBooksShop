@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Sirena.Books.Domain.Entities;
+using Sirena.Books.Domain.Enums;
 
 namespace Sirena.Books.Domain.Interfaces
 {
@@ -60,7 +61,7 @@ namespace Sirena.Books.Domain.Interfaces
         /// <param name="maxDate">Дата окончания периода</param>
         /// <param name="cancellationToken">Токен отмены</param>
         /// <returns></returns>
-        Task<IDictionary<int,int>> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate,
+        Task<IDictionary<BookType,int>> GetSalesByTypesAsync(DateTime minDate, DateTime maxDate,
             CancellationToken cancellationToken);
     }
 }
